@@ -1,0 +1,52 @@
+# Python
+__pycache__/
+*.py[cod]
+*$py.class
+*.egg-info/
+*.egg
+dist/
+build/
+*.so
+*.רותם
+
+# Virtual environment
+.venv/
+venv/
+ENV/
+env/
+pip-log.txt
+pip-delete-this-directory.txt
+.Python
+
+# Environment variables
+.env
+*.env
+
+# IDE and editor files
+.idea/
+.vscode/
+*.swp
+*.swo
+
+# OS-generated files
+.DS_Store
+Thumbs.db
+
+# Streamlit
+# Streamlit's main caching is usually in ~/.streamlit, but if it creates local cache/data dirs:
+.streamlit/ 
+streamlit_data/
+
+# Temporary files created by the app (if any specific patterns)
+# e.g., if you were creating other temp files not handled by `tempfile` module's auto-cleanup.
+# *.tmp
+
+# Jupyter Notebook checkpoints (if you used notebooks at any point)
+.ipynb_checkpoints
+
+# FAISS index files (if saved locally and you don't want to commit them)
+# *.faiss
+# *.index
+
+# Large data files (if any were downloaded/generated and are too big for Git)
+# data/*.big_dataset
