@@ -21,6 +21,24 @@ from langchain.chains import create_retrieval_chain
 # Other useful libraries (if needed for specific data loaders)
 import pandas as pd
 
+# main.py
+from fastapi import FastAPI
+from controller.chat_controller import router as chat_router
+from fastapi.middleware.cors import CORSMiddleware
+
+app = FastAPI(title="Chatbot API")
+app.add_middleware(
+    CORSMiddleware,
+    allow_origins=["*"],   # you can restrict later to your frontend domain
+    allow_credentials=True,
+    allow_methods=["*"],
+    allow_headers=["*"],
+)
+
+# Register routes
+app.include_router(chat_router)
+
+
 def setup_environment():
     """Loads environment variables from .env file."""
     load_dotenv()
@@ -70,7 +88,7 @@ def load_documents(file_path, file_type):
         print(f"Error loading {file_type} file '{file_path}': {e}")
         return []
     return documents
-DATA_FILE_PATH = "data/dataset_childrenbook.pdf" # Using the provided PDF
+DATA_FILE_PATH = "RAG_based_Chatbot-main/data/dataset_childrenbook.pdf" # Using the provided PDF
 DATA_FILE_TYPE = "pdf"
 
 documents = load_documents(DATA_FILE_PATH, DATA_FILE_TYPE)
@@ -98,7 +116,7 @@ def create_rag_pipeline(docs):
         return None
 
     # 1. Split Documents into Chunks
-    text_splitter = RecursiveCharacterTextSplitter(chunk_size=1000, chunk_overlap=200)
+    text_splitter = RecursiveCharacterTextSplitter(chunk_size=1000, chunk_overlap=50)
     texts = text_splitter.split_documents(docs)
     if not texts:
         print("Text splitting resulted in no chunks. Check document content and splitter settings.")
